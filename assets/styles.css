@@ -564,7 +564,7 @@ button, input, textarea, select {
 .about-image {
     flex: 1;
     position: relative;
-    height: 400px;
+    height: 500px;
 }
 
 .image-container {
