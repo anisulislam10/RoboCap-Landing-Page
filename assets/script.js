@@ -48,41 +48,94 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Form submission handling
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Here you would typically send the data to a server
-            console.log('Form submitted:', data);
-            
-            // Show success message
-            alert('Thank you for your message! We will get back to you soon.');
-            this.reset();
-        });
+  document.getElementById('contactForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const toast = document.getElementById('toast');
+    
+    // Clear previous error messages
+    document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+    
+    // Collect form data
+    const firstName = form.firstName.value.trim();
+    const lastName = form.lastName.value.trim();
+    const email = form.email.value.trim();
+    const company = form.company.value.trim();
+    const products = Array.from(form.querySelectorAll('input[name="products"]:checked')).map(input => input.value);
+    const help = form.help.value.trim();
+    const hearAbout = form.hearAbout.value;
+    
+    // Client-side validation
+    let hasError = false;
+    
+    if (!firstName) {
+        form.firstName.nextElementSibling.textContent = 'First name is required';
+        hasError = true;
+    }
+    if (!lastName) {
+        form.lastName.nextElementSibling.textContent = 'Last name is required';
+        hasError = true;
+    }
+    if (!email) {
+        form.email.nextElementSibling.textContent = 'Email is required';
+        hasError = true;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+        form.email.nextElementSibling.textContent = 'Invalid email format';
+        hasError = true;
+    }
+    if (products.length === 0) {
+        form.querySelector('.checkbox-group .error-message').textContent = 'Please select at least one product';
+        hasError = true;
+    }
+    if (!hearAbout) {
+        form.hearAbout.nextElementSibling.textContent = 'Please select an option';
+        hasError = true;
     }
     
-    const inquiryForm = document.getElementById('inquiryForm');
-    if (inquiryForm) {
-        inquiryForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Here you would typically send the data to a server
-            console.log('Inquiry submitted:', data);
-            
-            // Show success message
-            alert('Thank you for your inquiry! We will contact you shortly.');
-            this.reset();
+    if (hasError) return;
+    
+    // Prepare form data for Formspree
+    const formData = new FormData();
+    formData.append('firstName', firstName);
+    formData.append('lastName', lastName);
+    formData.append('email', email);
+    formData.append('company', company);
+    formData.append('products', products.join(', '));
+    formData.append('help', help);
+    formData.append('hearAbout', hearAbout);
+    formData.append('_subject', 'New Contact Form Submission');
+    formData.append('_language', 'en');
+    
+    // Show toast notification
+    const showToast = (message, type) => {
+        toast.textContent = message;
+        toast.className = `toast ${type} show`;
+        setTimeout(() => {
+            toast.className = 'toast';
+        }, 3000);
+    };
+    
+    try {
+       
+        const response = await fetch('https://formspree.io/f/xpwdgobl', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
         });
+        
+        if (response.ok) {
+            showToast('Thank you! Your message has been sent.', 'success');
+            form.reset();
+        } else {
+            showToast('Failed to send message. Please try again.', 'error');
+        }
+    } catch (error) {
+        showToast('An error occurred. Please try again later.', 'error');
     }
+});
     
     // Animation on scroll
     const animateOnScroll = function() {

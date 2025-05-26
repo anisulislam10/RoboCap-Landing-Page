@@ -767,7 +767,29 @@ button, input, textarea, select {
 .contact-link:hover svg {
     transform: translateX(3px);
 }
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1000;
+}
 
+.toast.success {
+    background-color: #6b4eee;
+}
+
+.toast.error {
+    background-color: #dc3545;
+}
+
+.toast.show {
+    opacity: 1;
+}
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .contact-cards {
@@ -837,6 +859,8 @@ button, input, textarea, select {
 }
 
 .footer-bottom {
+    display: flex;
+    flex-direction: row;
     padding: 1.5rem 0;
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
