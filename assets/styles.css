@@ -519,6 +519,30 @@ button, input, textarea, select {
 .compact-form .submit-button:hover svg {
     transform: translateX(2px);
 }
+.header-toast {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    color: white;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.header-toast.show {
+    opacity: 1;
+    max-height: 100px;
+    margin-bottom: 1rem;
+}
+
+.header-toast.success {
+    background-color: #445ffa;
+}
+
+.header-toast.error {
+    background-color: #dc3545;
+}
 
 /* Responsive Adjustments */
 @media (max-width: 480px) {

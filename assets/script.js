@@ -48,14 +48,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Form submission handling
-  document.getElementById('contactForm').addEventListener('submit', async function(event) {
+document.getElementById('contactForm').addEventListener('submit', async function(event) {
     event.preventDefault();
     
     const form = event.target;
     const toast = document.getElementById('toast');
+    const headerToast = document.getElementById('headerToast');
     
-    // Clear previous error messages
+    // Clear previous messages
     document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+    headerToast.className = 'header-toast';
     
     // Collect form data
     const firstName = form.firstName.value.trim();
@@ -107,17 +109,24 @@ document.addEventListener('DOMContentLoaded', function() {
     formData.append('_subject', 'New Contact Form Submission');
     formData.append('_language', 'en');
     
-    // Show toast notification
+    // Show toast notifications
     const showToast = (message, type) => {
+        // Bottom toast
         toast.textContent = message;
         toast.className = `toast ${type} show`;
         setTimeout(() => {
             toast.className = 'toast';
         }, 3000);
+        
+        // Header toast
+        headerToast.textContent = message;
+        headerToast.className = `header-toast ${type} show`;
+        setTimeout(() => {
+            headerToast.className = 'header-toast';
+        }, 3000);
     };
     
     try {
-       
         const response = await fetch('https://formspree.io/f/xpwdgobl', {
             method: 'POST',
             body: formData,
