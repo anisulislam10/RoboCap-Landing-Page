@@ -81,47 +81,42 @@ document.addEventListener('DOMContentLoaded', () => {
 // Form Validation and Submission
 // Form Validation and Submission
  // Form validation and submission
-   // Form Validation and Submission
+  document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contactForm');
     const toast = document.getElementById('toast');
 
     if (!form) {
-        console.error('Form element with ID "contactForm" not found in DOM.');
+        console.error('RoboCap Form Error: Form element not found');
         return;
     }
 
-    if (!toast) {
-        console.error('Toast element with ID "toast" not found in DOM.');
-        return;
-    }
+    console.log('RoboCap Form Debug: Form found', form);
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
-        const submitButton = form.querySelector('.submit-button');
-        if (submitButton) {
-            submitButton.disabled = true;
-        }
+        console.log('Form submission started');
 
-        // Clear previous error messages
+        // Disable submit button
+        const submitButton = form.querySelector('.submit-button');
+        if (submitButton) submitButton.disabled = true;
+
+        // Clear previous errors
         document.querySelectorAll('.error-message').forEach(el => {
             el.textContent = '';
             el.className = 'error-message';
         });
 
-        // Client-side validation
+        // Validation (unchanged from your original code)
         let hasError = false;
         const requiredFields = [
-            {
-                field: form.name,
-                error: 'Name is required'
-            },
-            {
-                field: form.email,
+            { field: form.name, error: 'Name is required' },
+            { 
+                field: form.email, 
                 error: 'Email is required',
                 validate: (value) => !/\S+@\S+\.\S+/.test(value) ? 'Invalid email format' : null
             },
-            {
-                field: form.phone,
+            { 
+                field: form.phone, 
                 error: 'Phone number is required',
                 validate: (value) => !/^\+?\d{10,15}$/.test(value) ? 'Invalid phone number' : null
             }
@@ -129,12 +124,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         requiredFields.forEach(({ field, error, validate }) => {
             if (!field) {
-                console.error(`Form field for ${error.toLowerCase()} not found`);
+                console.error(`Field missing: ${error}`);
                 hasError = true;
                 return;
             }
             const value = field.value.trim();
             const errorElement = field.nextElementSibling;
+            
             if (!value) {
                 if (errorElement) {
                     errorElement.textContent = error;
@@ -152,45 +148,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (hasError) {
+            console.log('Validation failed');
             if (submitButton) submitButton.disabled = false;
             return;
         }
 
-        // Form submission
+        // Prepare form data
+        const formData = new FormData(form);
+        console.log('Form data:', Object.fromEntries(formData.entries()));
+
         try {
+            console.log('Sending to FormSpree...');
             const response = await fetch('https://formspree.io/f/xpwdgobl', {
                 method: 'POST',
-                body: new FormData(form),
+                body: formData,
                 headers: {
                     'Accept': 'application/json'
                 }
             });
 
+            console.log('Response status:', response.status);
+            const responseData = await response.json();
+            console.log('Full response:', responseData);
+
             if (response.ok) {
                 toast.textContent = 'Thank you! Your request has been submitted.';
                 toast.className = 'toast success show';
                 form.reset();
-                setTimeout(() => {
-                    toast.className = 'toast success';
-                }, 3000);
+                setTimeout(() => toast.className = 'toast success', 3000);
             } else {
-                const errorData = await response.json();
-                toast.textContent = errorData.error || 'Failed to send message. Please try again.';
+                toast.textContent = responseData.error || 'Failed to send message. Please try again.';
                 toast.className = 'toast error show';
-                setTimeout(() => {
-                    toast.className = 'toast error';
-                }, 3000);
+                setTimeout(() => toast.className = 'toast error', 3000);
             }
         } catch (error) {
+            console.error('Submission error:', error);
             toast.textContent = 'An error occurred. Please try again later.';
             toast.className = 'toast error show';
-            setTimeout(() => {
-                toast.className = 'toast error';
-            }, 3000);
+            setTimeout(() => toast.className = 'toast error', 3000);
         } finally {
             if (submitButton) submitButton.disabled = false;
         }
     });
+});
   // Animate elements when they come into view
   const animateOnScroll = function() {
     const elements = document.querySelectorAll('.feature-card, .spec-item, .component-card, .video-wrapper');
