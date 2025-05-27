@@ -77,91 +77,167 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCountdown();
 
     // Form Submission Handling
+   // Form Validation and Submission
+// Form Validation and Submission
+// Form Validation and Submission
+ // Form validation and submission
+   // Form Validation and Submission
     const form = document.getElementById('contactForm');
     const toast = document.getElementById('toast');
-    const headerToast = document.getElementById('headerToast');
 
-    const showToast = (message, isError = false) => {
-        const target = isError ? toast : headerToast;
-        target.textContent = message;
-        target.style.display = 'block';
-        target.style.background = isError ? '#ff4d4f' : '#3b82f6';
-        setTimeout(() => {
-            target.style.display = 'none';
-        }, 3000);
-    };
+    if (!form) {
+        console.error('Form element with ID "contactForm" not found in DOM.');
+        return;
+    }
 
-    const validateForm = () => {
-        let isValid = true;
-        const firstName = document.getElementById('firstName');
-        const lastName = document.getElementById('lastName');
-        const email = document.getElementById('email');
-        const checkboxes = document.querySelectorAll('input[name="products"]');
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!toast) {
+        console.error('Toast element with ID "toast" not found in DOM.');
+        return;
+    }
 
-        document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
-
-        if (!firstName.value.trim()) {
-            firstName.nextElementSibling.textContent = 'First name is required';
-            isValid = false;
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const submitButton = form.querySelector('.submit-button');
+        if (submitButton) {
+            submitButton.disabled = true;
         }
 
-        if (!lastName.value.trim()) {
-            lastName.nextElementSibling.textContent = 'Last name is required';
-            isValid = false;
-        }
+        // Clear previous error messages
+        document.querySelectorAll('.error-message').forEach(el => {
+            el.textContent = '';
+            el.className = 'error-message';
+        });
 
-        if (!email.value.trim() || !emailRegex.test(email.value)) {
-            email.nextElementSibling.textContent = 'Valid email is required';
-            isValid = false;
-        }
+        // Client-side validation
+        let hasError = false;
+        const requiredFields = [
+            {
+                field: form.name,
+                error: 'Name is required'
+            },
+            {
+                field: form.email,
+                error: 'Email is required',
+                validate: (value) => !/\S+@\S+\.\S+/.test(value) ? 'Invalid email format' : null
+            },
+            {
+                field: form.phone,
+                error: 'Phone number is required',
+                validate: (value) => !/^\+?\d{10,15}$/.test(value) ? 'Invalid phone number' : null
+            }
+        ];
 
-        const checked = Array.from(checkboxes).some(checkbox => checkbox.checked);
-        if (!checked) {
-            checkboxes[0].closest('.checkbox-group').querySelector('.error-message').textContent = 'Select at least one product';
-            isValid = false;
-        }
-
-        return isValid;
-    };
-
-    if (form) {
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            if (!validateForm()) {
-                showToast('Please fix the errors in the form', true);
+        requiredFields.forEach(({ field, error, validate }) => {
+            if (!field) {
+                console.error(`Form field for ${error.toLowerCase()} not found`);
+                hasError = true;
                 return;
             }
+            const value = field.value.trim();
+            const errorElement = field.nextElementSibling;
+            if (!value) {
+                if (errorElement) {
+                    errorElement.textContent = error;
+                    errorElement.className = 'error-message show';
+                }
+                hasError = true;
+            } else if (validate) {
+                const validationError = validate(value);
+                if (validationError && errorElement) {
+                    errorElement.textContent = validationError;
+                    errorElement.className = 'error-message show';
+                    hasError = true;
+                }
+            }
+        });
 
-            const formData = new FormData(form);
-            const data = {};
-            formData.forEach((value, key) => {
-                if (key === 'products') {
-                    data[key] = data[key] ? [...data[key], value] : [value];
-                } else {
-                    data[key] = value;
+        if (hasError) {
+            if (submitButton) submitButton.disabled = false;
+            return;
+        }
+
+        // Form submission
+        try {
+            const response = await fetch('https://formspree.io/f/xpwdgobl', {
+                method: 'POST',
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
                 }
             });
 
-            try {
-                const response = await fetch('https://formspree.io/f/xpwdgobl', {
-                    method: 'POST',
-                    headers: { 'Accept': 'application/json' },
-                    body: new FormData(form)
-                });
-
-                if (response.ok) {
-                    showToast('Thank you! Your message has been sent.', false);
-                    form.reset();
-                } else {
-                    showToast('Failed to send message. Please try again.', true);
-                }
-            } catch (error) {
-                showToast('An error occurred. Please try again later.', true);
+            if (response.ok) {
+                toast.textContent = 'Thank you! Your request has been submitted.';
+                toast.className = 'toast success show';
+                form.reset();
+                setTimeout(() => {
+                    toast.className = 'toast success';
+                }, 3000);
+            } else {
+                const errorData = await response.json();
+                toast.textContent = errorData.error || 'Failed to send message. Please try again.';
+                toast.className = 'toast error show';
+                setTimeout(() => {
+                    toast.className = 'toast error';
+                }, 3000);
             }
-        });
-    }
+        } catch (error) {
+            toast.textContent = 'An error occurred. Please try again later.';
+            toast.className = 'toast error show';
+            setTimeout(() => {
+                toast.className = 'toast error';
+            }, 3000);
+        } finally {
+            if (submitButton) submitButton.disabled = false;
+        }
+    });
+  // Animate elements when they come into view
+  const animateOnScroll = function() {
+    const elements = document.querySelectorAll('.feature-card, .spec-item, .component-card, .video-wrapper');
+    
+    elements.forEach(element => {
+      const elementPosition = element.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      
+      if (elementPosition < windowHeight - 100) {
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
+      }
+    });
+  };
+  
+  // Set initial state for animated elements
+  document.querySelectorAll('.feature-card, .spec-item, .component-card, .video-wrapper').forEach(element => {
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(20px)';
+    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  });
+  
+  // Run once on load
+  animateOnScroll();
+  
+  // Run on scroll
+  window.addEventListener('scroll', animateOnScroll);
+  
+  // Add floating animation to feature icons
+  
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const specRows = document.querySelectorAll('.spec-row');
+  
+  specRows.forEach(row => {
+    const name = row.querySelector('.spec-name');
+    
+    name.addEventListener('click', function() {
+      // Toggle the active class on the parent row
+      row.classList.toggle('active');
+    });
+  });
+
+
+
 
     // Animation on Scroll
     const animateOnScroll = () => {
