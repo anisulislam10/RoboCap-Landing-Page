@@ -86,21 +86,66 @@
                       
                     </div>
                     <div id="headerToast" class="header-toast"></div>
-                    <form id="contactForm" method="POST" action="https://formspree.io/f/xpwdgobl">
-    <input type="hidden" name="_subject" value="RoboCap Inquiry">
+                  <form id="contactForm" method="POST">
+    <input type="hidden" name="_subject" value="Limited Time Offer Inquiry">
     <input type="hidden" name="_language" value="en">
     <input type="text" name="_gotcha" style="display:none">
-    <div class="form-group">
-        <input type="text" id="name" name="name" placeholder="Enter your full name" required autocomplete="name">
-        <div class="error-message"></div>
+    <div class="form-row">
+        <div class="form-group half">
+            <input type="text" id="firstName" name="firstName" placeholder="First Name" required autocomplete="given-name">
+            <div class="error-message"></div>
+        </div>
+        <div class="form-group half">
+            <input type="text" id="lastName" name="lastName" placeholder="Last Name" required autocomplete="family-name">
+            <div class="error-message"></div>
+        </div>
     </div>
     <div class="form-group">
         <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="email">
         <div class="error-message"></div>
     </div>
     <div class="form-group">
-        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required autocomplete="tel">
-        <div class="error-message"></div>
+        <label class="form-label">What product(s) do you work with?</label>
+        <div class="checkbox-group">
+            <div class="checkbox-row">
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="products[]" value="balms">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-label">BALMS</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="products[]" value="bottles">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-label">BOTTLES</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="products[]" value="capsules">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-label">CAPSULES</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="products[]" value="cartridges">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-label">CARTRIDGES</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="products[]" value="creams">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-label">CREAMS</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="products[]" value="gummies">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-label">GUMMIES</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="products[]" value="other">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-label">OTHER</span>
+                </label>
+            </div>
+            <div class="error-message"></div>
+        </div>
     </div>
     <button type="submit" class="submit-button">
         <span>Submit</span>
