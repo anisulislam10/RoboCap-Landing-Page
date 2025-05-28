@@ -295,6 +295,7 @@ button, input, textarea, select {
     flex: 1;
     max-width: 1200px;
     padding: 4px;
+    margin-top: 80px;
 }
 
 .limited-offer {
@@ -824,6 +825,14 @@ input:focus {
     .section-subtitle {
         font-size: 1rem;
     }
+    .button-container{
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+        margin-bottom: 10px;
+
+    }
+
 }
 
 @media (max-width: 480px) {
@@ -839,6 +848,28 @@ input:focus {
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
     }
+    .button-container {
+    display: flex;
+    flex-direction: column;
+   
+    gap: 2px;
+    margin-bottom: 10px;
+
+            
+
+}
+    .cta-button{
+font-size: 12px;
+    }
+    .hero-feature{
+        font-size: 12px;
+        text-align: start;
+    }
+    .compact-form{
+        margin-bottom: 10px;
+        
+    }
+
 }
 
 /* Footer */
@@ -966,6 +997,22 @@ input:focus {
     .contact-info {
         margin-bottom: 3rem;
     }
+    .container-form-buttons{
+        display: flex;
+        flex-direction: row;
+
+    }
+    .button-container{
+        display: flex;
+        flex-direction: row;
+        margin-right: 350px;
+        gap: 5px;
+
+
+    }
+    .compact-form{
+      
+    }
 }
 
 @media (max-width: 768px) {
@@ -1019,6 +1066,7 @@ input:focus {
     .about-image {
         height: 300px;
     }
+    
 }
 
 @media (max-width: 480px) {
