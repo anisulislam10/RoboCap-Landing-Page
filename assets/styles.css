@@ -338,7 +338,7 @@ button, input, textarea, select {
     font-size: 18px;
     color: #ffffff;
     margin-bottom: 30px;
-    line-height: 1.6;
+    line-height: 1.5;
 
 }
 
@@ -566,11 +566,10 @@ input:focus {
 
 .about-text p {
     margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: 16px;
+    line-height: 1.2;
      font-family: var(--font-heading);
     font-weight: 400;
-    font-size: 15px;
 }
 
 .about-image {
@@ -1212,11 +1211,10 @@ font-size: 12px;
 }
 
 .testimonial-content {
-  font-size: 1.2rem;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.2;
   color: #333;
   margin-bottom: 2rem;
-  font-style: italic;
   position: relative;
   padding: 0 2rem;
 }
