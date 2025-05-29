@@ -881,14 +881,14 @@ font-size: 12px;
 .footer-content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 3rem;
+    gap: 1rem;
     margin-bottom: 3rem;
         font-family: var(--font-main);
 
 }
 
 .footer-section h3 {
-    font-size: 1.25rem;
+    font-size: 16px;
     margin-bottom: 1.5rem;
     color: white;
 }
@@ -897,7 +897,7 @@ font-size: 12px;
     margin-bottom: 1rem;
     opacity: 0.8;
         font-family: var(--font-main);
-        font-size: 15px;
+        font-size: 14px;
 
 }
 
