@@ -13,8 +13,8 @@
     --success-color: #10b981;
     --warning-color: #f59e0b;
     
-    --font-main: 'Graphik-Medium',sans-serif ;
-    --font-heading: 'Graphik-Medium',sans-serif;
+    --font-main: 'Graphik',sans-serif ;
+    --font-heading: 'Graphik',sans-serif;
     
     
     
@@ -119,6 +119,7 @@ button, input, textarea, select {
     margin-bottom: 3rem;
     position: relative;
     color: var(--dark-color);
+
 }
 
 .section-title::after {
@@ -337,7 +338,7 @@ button, input, textarea, select {
     padding: 12px 20px;
     color: white;
     transition: all 0.3s ease;
-
+font-family: var(--font-heading);
 }
 
 .cta-button:hover {
@@ -543,7 +544,7 @@ input:focus {
 .about-text p {
     margin-bottom: 1.5rem;
     font-size: 16px;
-    line-height: 1.2;
+    line-height: 1.5;
      font-family: var(--font-main);
     font-weight: 400;
     color: #000000;
@@ -583,6 +584,7 @@ input:focus {
     font-family: var(--font-main);
     font-size: 15px;
     font-weight: 300;
+    line-height: 1.5;
 }
 
 .products-grid {
