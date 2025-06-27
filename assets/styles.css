@@ -880,12 +880,11 @@ font-size: 12px;
 }
 
 .footer-section p {
-    margin-bottom: 1rem;
+    margin-bottom: 0.9rem; /* Reduced from 1rem */
     opacity: 0.8;
-        font-family: var(--font-main);
-        font-size: 15px;
-        line-height: 1.5;
-
+    font-family: var(--font-main);
+    font-size: 15px;
+    line-height: 1.2; /* Reduced from 1.5 */
 }
 
 .footer-section ul li {
