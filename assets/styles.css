@@ -13,8 +13,8 @@
     --success-color: #10b981;
     --warning-color: #f59e0b;
     
-    --font-main: 'Graphik',sans-serif ;
-    --font-heading: 'Graphik',sans-serif;
+    --font-main: 'Graphik';
+    --font-heading: 'Graphik';
     
     
     
@@ -34,9 +34,8 @@
 @font-face {
   font-family: 'Graphik';
   src: url('/assets/fonts/Graphik-Family/graphik-10.ttf') format('truetype');
-  font-weight: 400;  /* Added - crucial for font-weight to work */
-  font-style: normal; /* Fixed typo (was "nomal") */
-  font-display: swap; /* Good practice for performance */
+  font-weight: normal;
+    font-style: normal;
 }
 
 /* @font-face {
@@ -73,7 +72,6 @@ body {
     color: var(--dark-color);
     background-color: var(--light-color);
     overflow-x: hidden;
-    letter-spacing: -0.05rem;
 
 }
 
@@ -115,59 +113,44 @@ button, input, textarea, select {
     padding: 0 1.5rem;
 }
 
-.section-title {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 3rem;
-    position: relative;
-    color: var(--dark-color);
 
+.button-container{
+    margin-top: 20px;
 }
-
-.section-title::after {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 4px;
-    background: var(--primary-color);
-    margin: 1rem auto 0;
-    border-radius: 2px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: var(--radius-md);
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-    text-align: center;
-}
-
-.btn:hover {
-    background-color: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
+/* CTA Button Styles */
 .cta-button {
+    
     display: inline-block;
+    color: white !important;
     padding: 1rem 2rem;
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: var(--radius-md);
-    font-weight: 500;
-    font-size: 1.1rem;
-    transition: var(--transition);
-    box-shadow: var(--shadow-md);
+    background-color: #015BB9 !important;
+    border-radius: var(--radius-md, 0.375rem) !important; /* Fallback if variable not defined */
+    font-weight: 500 !important;
+    font-size:14px !important;
+    text-decoration: none !important;
+    border: 2px solid #015BB9 !important; /* Matching border */
+    cursor: pointer !important;
+        border-radius: 20px !important;
+transition: var(--transition) !important;
+    margin: 0 0.1rem !important; /* Spacing between buttons */
 }
 
 .cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
+    background-color: white !important;
+    color: #015BB9 !important; /* Blue text on white background */
+    border-color: #015BB9 !important; /* Maintain border color */
+
+}
+
+/* Focus state for accessibility */
+.cta-button:focus {
+    outline: 1px solid #942843 ;
+    outline-offset: 2px !important;
+}
+
+/* Active state */
+.cta-button:active {
+    transform: translateY(-1px) !important;
 }
 
 /* Header & Navigation */
@@ -177,14 +160,9 @@ button, input, textarea, select {
     left: 0;
     width: 100%;
     z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 1);
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
-}
-
-.header.scrolled {
-    background-color: rgba(255, 255, 255, 0.98);
-    box-shadow: var(--shadow-md);
 }
 
 .navbar {
@@ -301,27 +279,34 @@ button, input, textarea, select {
     max-width: 1200px;
     padding: 4px;
     margin-top: 80px;
-}
+    font-family: var(--font-main);
+    }
 
 
 .hero-title {
-    font-size: 45px;
-    color: #fff;
-    margin-bottom: 20px;
-    line-height: 1.2;
-    font-weight: 600;
-letter-spacing: -0.05rem;
+    font-size: 40px;
+    color: #fff !important;
+    margin-bottom: 2px !important;
+    line-height: 1.5;
+    font-weight: 500 !important;
+    font-family: var(--dark-gray) !important;
 
 }
 
 .hero-subtitle {
-    font-size: 18px;
-    color: #ffffff;
-    margin-bottom: 30px;
-    line-height: 1.5;
-    font-family: var(--font-main);
-    font-weight: 500;
-
+    max-width: 500px;
+    font-size: 14px;
+    margin-bottom: 1.5rem !important;
+    opacity: 0 ;
+    transform: translateY(20px) !important;
+    animation: fadeInUp 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards !important;
+    animation-delay: 0.4s !important;
+     margin-inline-start: 0px !important;
+    margin-inline-end: 0px !important;
+    unicode-bidi: isolate !important;
+    font-weight:50 ;
+    line-height: auto !important;
+    color: white !important;
 }
 
 .cta-button {
@@ -335,13 +320,17 @@ letter-spacing: -0.05rem;
     font-weight: 500;
 }
 .hero-feature {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1px;
-    padding: 12px 20px;
-    color: white;
-    transition: all 0.3s ease;
-font-family: var(--font-heading);
+    display: flex !important;
+    align-items: center !important;
+    transform: translateY(20px) !important;
+    animation: fadeInUp 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    animation-delay: 0.4s !important;
+    unicode-bidi: isolate !important;
+    font-weight: 100 !important;
+    line-height: 1.5 !important;
+    color: white !important;
+    font-size: 13px !important;
+   padding: 2px !important;
 }
 
 .cta-button:hover {
@@ -546,11 +535,10 @@ input:focus {
 
 .about-text p {
     margin-bottom: 1.5rem;
-    font-size: 16px;
-    line-height: 1.5;
-     font-family: var(--font-main);
-    font-weight: 400;
-    color: #000000;
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+    font-weight: 100 !important;
+    color: #000000 !important;
 }
 
 .about-image {
@@ -606,7 +594,7 @@ input:focus {
 }
 
 .product-card:hover {
-    transform: translateY(-50px);
+    transform: translateY(-10px);
     box-shadow: var(--shadow-lg);
 }
 
@@ -619,21 +607,23 @@ input:focus {
 
 .product-card h3 {
     padding: 1rem 1.5rem 0;
-    font-size: 1.5rem;
+    font-size: 16px;
     color: var(--dark-color);
     font-family: var(--font-main);
 }
 
 .production-rate {
     padding: 0 1.5rem;
-    font-weight: 500;
+    font-weight: 200;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
 }
 
 .product-card p {
     padding: 0 1.2rem 1.2rem;
-    color: var(--dark-gray);
+    color: black;
+    font-size: 13px;
+
 }
 
 /* Features Section */
@@ -677,7 +667,8 @@ input:focus {
 }
 
 .feature-card p {
-    color: var(--dark-gray);
+    color: black;
+    font-size: 13px;
 }
 
 /* Contact Section */
@@ -820,6 +811,9 @@ input:focus {
 
 }
 
+
+
+
 @media (max-width: 480px) {
     .contact-section {
         padding: 2rem 0.5rem;
@@ -849,6 +843,7 @@ font-size: 12px;
     .hero-feature{
         font-size: 12px;
         text-align: start;
+       display: none;
     }
     .compact-form{
         margin-bottom: 10px;
@@ -1045,8 +1040,24 @@ font-size: 12px;
     
     .hero-subtitle {
         font-size: 1.1rem;
+        display: none;
     }
-    
+
+    .hero-feature{
+        display: none !important;
+    }
+    .button-container{
+        display: flex;
+        flex-direction: column;
+     width: 100%;
+    }
+    .footer-section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+    }
     .nav-links {
         position: fixed;
         top: 70px;
@@ -1202,16 +1213,15 @@ font-size: 12px;
 
 /* testimonial section */
 
+/* Updated CSS */
 .testimonials-section {
-  padding: 5rem 0;
+  padding: 4rem 0;
   background: #f8f9fa;
 }
 
 .testimonials-slider {
-  max-width: 800px;
   margin: 0 auto;
   position: relative;
-  min-height: 300px;
 }
 
 .testimonial {
@@ -1219,32 +1229,40 @@ font-size: 12px;
   top: 0;
   left: 0;
   width: 100%;
+    height: 100%; /* Take full height of container */
+
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
   text-align: center;
   padding: 2rem;
+  transform: translateX(20px);
+  pointer-events: none;
 }
 
 .testimonial.active {
   opacity: 1;
   position: relative;
+  transform: translateX(0);
+  pointer-events: auto;
 }
 
 .testimonial-content {
-  font-size: 15px;
-  line-height: 1.2;
+  font-size: 1.25rem;
+  line-height: 1.6;
   color: #333;
-  margin-bottom: 2rem;
   position: relative;
   padding: 0 2rem;
+  margin-bottom: 2rem;
 }
 
 .testimonial-content:before,
 .testimonial-content:after {
   content: '"';
   font-size: 3rem;
-  color: rgba(0,0,0,0.1);
+  color: rgba(1, 91, 185, 0.2); /* Using your brand blue */
   position: absolute;
+  font-family: serif;
+  line-height: 1;
 }
 
 .testimonial-content:before {
@@ -1257,16 +1275,22 @@ font-size: 12px;
   bottom: -2rem;
 }
 
+.testimonial-author {
+  margin-top: 2rem;
+}
+
 .testimonial-author h4 {
   margin: 0;
   color: #2c3e50;
   font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .testimonial-author p {
   margin: 0.5rem 0 0;
   color: #7f8c8d;
   font-size: 1rem;
+  font-style: italic;
 }
 
 .slider-controls {
@@ -1274,20 +1298,34 @@ font-size: 12px;
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
-  gap: 1rem;
+  gap: 2rem;
 }
 
-.slider-prev, .slider-next {
+.slider-prev, 
+.slider-next {
   background: none;
   border: none;
   font-size: 2rem;
   cursor: pointer;
-  color: #2c3e50;
+  color: #015BB9; /* Your brand blue */
+  transition: transform 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.slider-prev:hover,
+.slider-next:hover {
+  transform: scale(1.2);
+  background: rgba(1, 91, 185, 0.1);
 }
 
 .slider-dots {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .slider-dot {
@@ -1297,37 +1335,39 @@ font-size: 12px;
   background: #bdc3c7;
   cursor: pointer;
   transition: all 0.3s ease;
+  border: none;
+  padding: 0;
 }
 
 .slider-dot.active {
-  background: #2c3e50;
-  transform: scale(1.2);
+  background: #015BB9; /* Your brand blue */
+  transform: scale(1.3);
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
   .testimonials-section {
-    padding: 3rem 0;
+    padding: 3rem 1rem;
   }
   
   .testimonial-content {
     font-size: 1.1rem;
     padding: 0 1.5rem;
   }
+  
+  .slider-controls {
+    gap: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
   .testimonial-content {
     font-size: 1rem;
-    padding: 0 1rem;
+    padding: 0;
   }
   
   .testimonial-content:before,
   .testimonial-content:after {
     font-size: 2rem;
-  }
-  
-  .testimonial-author h4 {
-    font-size: 1.1rem;
   }
 }
