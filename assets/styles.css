@@ -123,12 +123,12 @@ button, input, textarea, select {
     display: inline-block;
     color: white !important;
     padding: 1rem 2rem;
-    background-color: #015BB9 !important;
+    background-color: #0271E3 !important;
     border-radius: var(--radius-md, 0.375rem) !important; /* Fallback if variable not defined */
     font-weight: 500 !important;
     font-size:14px !important;
     text-decoration: none !important;
-    border: 2px solid #015BB9 !important; /* Matching border */
+    border: 2px solid #0271E3 !important; /* Matching border */
     cursor: pointer !important;
         border-radius: 20px !important;
 transition: var(--transition) !important;
@@ -137,9 +137,27 @@ transition: var(--transition) !important;
 
 .cta-button:hover {
     background-color: white !important;
-    color: #015BB9 !important; /* Blue text on white background */
-    border-color: #015BB9 !important; /* Maintain border color */
+    color: #0271E3 !important; /* Blue text on white background */
+    border-color: #0271E3 !important; /* Maintain border color */
 
+}
+.contact-btn {
+    background-color: #0271E3;
+    color: white !important;
+    padding: 10px 20px !important;
+    font-size: 15.4px !important;
+    font-style: normal;
+    border-style: solid;
+    border-radius: 20px; 
+    border: 2px solid #0271E3; /* Added proper border declaration */
+}
+
+.contact-btn:hover {
+    background-color: white;
+    border: 2px solid #0271E3; /* Added proper border declaration */
+    color: #0271E3 !important;
+
+    
 }
 
 /* Focus state for accessibility */
@@ -202,8 +220,7 @@ transition: var(--transition) !important;
     left: 0;
     width: 0;
     height: 2px;
-    background-color: var(--primary-color);
-    transition: var(--transition);
+  
 }
 
 .nav-links a:hover::after {
