@@ -226,7 +226,9 @@ transition: var(--transition) !important;
 .nav-links a:hover::after {
     width: 100%;
 }
-
+.nav-ho:hover{
+    color: #0056b3;
+}
 .hamburger {
     display: none;
     cursor: pointer;
